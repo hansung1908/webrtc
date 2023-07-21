@@ -1,4 +1,4 @@
-package com.hansung.webrtc.Handler;
+package com.hansung.webrtc.handler;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Component
-public class SocketHandler extends TextWebSocketHandler {
+public class SignalHandler extends TextWebSocketHandler {
 
     List<WebSocketSession>sessions = new CopyOnWriteArrayList<>();
 
