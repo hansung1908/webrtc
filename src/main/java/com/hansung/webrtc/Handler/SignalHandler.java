@@ -12,7 +12,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Component
 public class SignalHandler extends TextWebSocketHandler {
 
-    List<WebSocketSession>sessions = new CopyOnWriteArrayList<>();
+    List<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
 
     // 클라이언트로부터 메시지를 받으면 보낸 사람의 세션 ID와 목록의 세션을 비교하여 보낸 사람을 제외한 다른 모든 클라이언트에 메시지를 전송
     @Override
