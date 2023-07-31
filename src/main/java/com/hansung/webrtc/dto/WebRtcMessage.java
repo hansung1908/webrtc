@@ -1,9 +1,11 @@
 package com.hansung.webrtc.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 // WebRTC 연결 시 메세지 내용을 담는 클래스
 @Data
+@AllArgsConstructor
 public class WebRtcMessage {
     private String from; // 보내는 유저
     private String type; // 메세지 타입
