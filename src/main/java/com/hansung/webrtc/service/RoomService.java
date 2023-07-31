@@ -1,6 +1,8 @@
 package com.hansung.webrtc.service;
 
 import com.hansung.webrtc.dto.Room;
+import com.hansung.webrtc.util.Parser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -9,6 +11,9 @@ import java.util.*;
 @Service
 public class RoomService {
 
+    @Autowired
+    private Parser parser;
+
     // comparator는 room에 담겨있는 방의 번호를 바탕으로 정렬
     private final Set<Room> rooms = new TreeSet<>(Comparator.comparing(Room::getId));
 
@@ -16,6 +21,10 @@ public class RoomService {
         TreeSet<Room> copy = new TreeSet<>(Comparator.comparing(Room::getId));
         copy.addAll(rooms);
         return copy;
+    }
+
+    public Optional<Room> findRoomByStringId(String sid) {
+        return rooms.stream().filter(r -> r.getId().equals(parser.parseId(sid).get())).findAny();
     }
 
     public Boolean addRoom(Room room) {
