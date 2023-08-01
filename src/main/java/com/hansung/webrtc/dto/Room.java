@@ -1,5 +1,6 @@
 package com.hansung.webrtc.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -14,6 +15,7 @@ public class Room {
         this.id = id;
     }
 
+    @NotNull
     private Long id;
     private Map<String, WebSocketSession> clients = new HashMap<>();
 }

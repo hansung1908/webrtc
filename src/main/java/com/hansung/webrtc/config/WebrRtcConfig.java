@@ -1,6 +1,8 @@
 package com.hansung.webrtc.config;
 
 import com.hansung.webrtc.Handler.SignalHandler;
+import com.hansung.webrtc.service.RoomService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
@@ -14,11 +16,14 @@ import org.springframework.web.socket.server.standard.ServletServerContainerFact
 @EnableWebSocket
 public class WebrRtcConfig implements WebSocketConfigurer {
 
+    @Autowired
+    private RoomService roomService;
+
     // /signal으로 요청이 올 경우 해당 handler가 동작하여 registry에 설정
     // 1. 메세지를 처리할 처리기, 2. 식별할 url, 3. 모든 출처에서 오는 요청을 허용
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(new SignalHandler(), "/signal")
+        registry.addHandler(new SignalHandler(roomService), "/signal")
                 .setAllowedOrigins("*");
     }
 

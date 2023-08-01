@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hansung.webrtc.dto.Room;
 import com.hansung.webrtc.dto.WebRtcMessage;
 import com.hansung.webrtc.service.RoomService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -20,12 +19,16 @@ import java.util.Optional;
 
 @Component
 public class SignalHandler extends TextWebSocketHandler {
-    @Autowired
-    private RoomService roomService;
+    
+    private final RoomService roomService;
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
     private Map<String, Room> sessionIdToRoomMap = new HashMap<>();
+
+    public SignalHandler(RoomService roomService) {
+        this.roomService = roomService;
+    }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) {
@@ -85,6 +88,7 @@ public class SignalHandler extends TextWebSocketHandler {
                     // message.data에 연결된 채팅방 id 포함
                     room = roomService.findRoomByStringId(data)
                             .orElseThrow(() -> new IOException("Invalid room number received!"));
+
                     // 채팅방 유저 목록에 클라이언트 추가
                     roomService.addClient(room, userName, session);
                     sessionIdToRoomMap.put(session.getId(), room);
@@ -94,6 +98,7 @@ public class SignalHandler extends TextWebSocketHandler {
                     // message.data에 연결된 채팅방 id 포함
                     // session id로 지정된 채팅방
                     room = sessionIdToRoomMap.get(session.getId());
+
                     // 채팅방 유저 목록에서 나간 클라이너트 제거
                     Optional<String> client = roomService.getClients(room).entrySet().stream()
                             .filter(entry -> Objects.equals(entry.getValue().getId(), session.getId()))
