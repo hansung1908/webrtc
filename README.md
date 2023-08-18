@@ -54,3 +54,9 @@
   - 단점
   - Mesh 방식보다는 서버의 부하가 증가
   - 대규모 N:M 구조에서는 여전히 Client의 부하 증가
+
+### https 설정
+- webrtc를 통해 웹에서 캠을 이용할 때 http로는 접속이 안되어 https 포트로 따로 설정해야 함
+- cmd에서 keytool -genkey -alias [인증서이름] -keyalg RSA -keysize 2048 -validity 700 -keypass [인증서패스워드] -storepass [저장소패스워드] -keystore [인증서파일명].jks (https 인증서를 발급)
+- application.properties에 인증서에 대한 정보를 설정하고 https 포트 또한 http 포트와 구별하여 설정
+- sslconfig 파일은 http로 요청이 들어오면 https포트로 리다이렉션
