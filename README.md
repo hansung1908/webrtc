@@ -39,3 +39,4 @@
 - cmd에서 keytool -genkey -alias [인증서이름] -keyalg RSA -keysize 2048 -validity 700 -keypass [인증서패스워드] -storepass [저장소패스워드] -keystore [인증서파일명].jks (https 인증서를 발급)
 - application.properties에 인증서에 대한 정보를 설정하고 https 포트 또한 http 포트와 구별하여 설정
 - sslconfig 파일은 http로 요청이 들어오면 https포트로 리다이렉션
+- 우분투 환경에서 실행시 openssl을 통해 우분투 환경에 맞는 인증서를 발급, application.properties에 인증서에 대한 설정도 갱신
