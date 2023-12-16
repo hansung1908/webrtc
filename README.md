@@ -2,7 +2,7 @@
 - web real-time communication의 약자로 웹 또는 에서 별도의 소프트웨어, 플러그인 없이 음성, 영상, 텍스트 같은 데이터를 브라우저끼리 주고 받을 수 있게 해주는 기술
 
 ### java
-- web, websocket, thymeleaf, lombok, devtools
+- web, websocket, thymeleaf, lombok, devtools, validation
 
 ### 실시간 통신을 위해 webrtc에서 제공하는 api
 - mediastream: 카메라와 마이크 등의 데이터 스트림 접근
